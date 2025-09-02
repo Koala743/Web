@@ -100,7 +100,6 @@
             fill: #333;
         }
 
-        /* Added visitor counter styles */
         .visitor-counter {
             position: fixed;
             top: 20px;
@@ -117,7 +116,6 @@
             text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
         }
 
-        /* Added copy button styles */
         .copy-btn {
             position: absolute;
             top: 10px;
@@ -425,7 +423,6 @@
                 height: 26px;
             }
 
-            /* Responsive visitor counter */
             .visitor-counter {
                 top: 15px;
                 left: 15px;
@@ -480,7 +477,6 @@
                 height: 24px;
             }
 
-            /* Mobile visitor counter */
             .visitor-counter {
                 top: 10px;
                 left: 10px;
@@ -556,14 +552,13 @@
 </head>
 <body>
 
-    <!-- Added visitor counter display -->
     <div class="visitor-counter" id="visitorCounter">
         Visitas: <span id="visitCount">0</span>
     </div>
 
     <div class="discord-btn" onclick="window.open('https://discord.gg/Y4GzzDjHem', '_blank')">
         <svg viewBox="0 0 24 24">
-            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
         </svg>
     </div>
 
@@ -577,7 +572,6 @@
     <div class="coverflow-container">
         <div class="coverflow-track" id="track">
             <div class="script-card" data-game="Dragon Blox Ultimate">
-                <!-- Added copy button to each card -->
                 <button class="copy-btn" onclick="copyScript('https://raw.githubusercontent.com/Colato6/Prueba.1/refs/heads/main/Farm.lua')" title="Copiar script">Copy</button>
                 <div class="vip-badge" onclick="window.open('https://koala743.github.io/main/', '_blank')" title="Obtener VIP">
                     <svg viewBox="0 0 24 24">
@@ -689,74 +683,88 @@
     <script>
         const GOOGLE_SHEETS_URL = 'https://docs.google.com/spreadsheets/d/16ccUHsX-EhbN7jeaDZ91wqw4nyiL8AM0kcq5MJWVyq8/edit?usp=drivesdk';
         const SHEET_ID = '16ccUHsX-EhbN7jeaDZ91wqw4nyiL8AM0kcq5MJWVyq8';
-        
-        function getDeviceId() {
-            let deviceId = localStorage.getItem('deviceId');
-            if (!deviceId) {
-                deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('deviceId', deviceId);
-            }
-            return deviceId;
-        }
 
-        function hasVisitedToday() {
-            const lastVisit = localStorage.getItem('lastVisit');
-            const today = new Date().toDateString();
-            return lastVisit === today;
-        }
+        const API_URL = 'https://api.sheety.co/2d508c8000bfe7c25d9c84423a0cb1e5/visitas/hoja1';
+        const STORAGE_KEY = 'contador_visitas';
 
-        function markVisitToday() {
-            const today = new Date().toDateString();
-            localStorage.setItem('lastVisit', today);
-        }
-
-        async function updateVisitorCount() {
+        async function obtenerVisitas() {
             try {
-                if (hasVisitedToday()) {
-                    // Solo mostrar el contador, no incrementar
-                    await getVisitorCount();
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                return Number(data.hoja1[0].visitas) || 0;
+            } catch (error) {
+                console.error('Error al obtener visitas:', error);
+                return null;
+            }
+        }
+
+        async function actualizarVisitas(nuevasVisitas) {
+            try {
+                const response = await fetch(`${API_URL}/2`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ hoja1: { visitas: nuevasVisitas } })
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('Error al actualizar visitas:', error);
+            }
+        }
+
+        function setVisitCountSimple(numero) {
+            const span = document.getElementById('visitCount');
+            span.textContent = numero;
+        }
+
+        function animarContadorSpan(inicio, fin, duracion = 800) {
+            const span = document.getElementById('visitCount');
+            let start = null;
+            function paso(timestamp) {
+                if (!start) start = timestamp;
+                const progreso = Math.min((timestamp - start) / duracion, 1);
+                const valor = Math.floor(inicio + (fin - inicio) * progreso);
+                span.textContent = valor;
+                if (progreso < 1) {
+                    requestAnimationFrame(paso);
+                }
+            }
+            requestAnimationFrame(paso);
+        }
+
+        async function iniciarContador() {
+            const span = document.getElementById('visitCount');
+            const guardado = localStorage.getItem(STORAGE_KEY);
+            if (guardado) {
+                setVisitCountSimple(Number(guardado));
+            } else {
+                span.textContent = '...';
+            }
+
+            try {
+                const visitasActuales = await obtenerVisitas();
+                if (visitasActuales === null) {
+                    span.textContent = '0';
                     return;
                 }
 
-                const deviceId = getDeviceId();
-                
-                // Simular actualización de Google Sheets (requiere configuración adicional del lado del servidor)
-                // Por ahora, usamos localStorage para el contador
-                let totalVisits = parseInt(localStorage.getItem('totalVisits') || '0');
-                totalVisits++;
-                localStorage.setItem('totalVisits', totalVisits.toString());
-                
-                document.getElementById('visitCount').textContent = totalVisits;
-                markVisitToday();
-                
-                console.log(`Nueva visita registrada. Device ID: ${deviceId}, Total: ${totalVisits}`);
-            } catch (error) {
-                console.error('Error updating visitor count:', error);
-                // Fallback to local count
-                let localCount = parseInt(localStorage.getItem('localVisitCount') || '0');
-                if (!hasVisitedToday()) {
-                    localCount++;
-                    localStorage.setItem('localVisitCount', localCount.toString());
-                    markVisitToday();
+                if (!localStorage.getItem('yaConto')) {
+                    const nuevasVisitas = visitasActuales + 1;
+                    await actualizarVisitas(nuevasVisitas);
+                    localStorage.setItem('yaConto', 'true');
+                    localStorage.setItem(STORAGE_KEY, nuevasVisitas);
+                    animarContadorSpan(Number(guardado) || visitasActuales, nuevasVisitas);
+                } else {
+                    localStorage.setItem(STORAGE_KEY, visitasActuales);
+                    animarContadorSpan(Number(guardado) || visitasActuales, visitasActuales);
                 }
-                document.getElementById('visitCount').textContent = localCount;
-            }
-        }
-
-        async function getVisitorCount() {
-            try {
-                // Mostrar contador local mientras se implementa la integración completa con Google Sheets
-                const totalVisits = parseInt(localStorage.getItem('totalVisits') || '0');
-                document.getElementById('visitCount').textContent = totalVisits;
             } catch (error) {
-                console.error('Error getting visitor count:', error);
-                document.getElementById('visitCount').textContent = '0';
+                span.textContent = guardado || '0';
+                console.error('Error:', error);
             }
         }
 
         function copyScript(scriptUrl) {
             const scriptContent = `loadstring(game:HttpGet('${scriptUrl}'))()`;
-            
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(scriptContent).then(() => {
                     showCopyNotification('Script copiado al portapapeles!');
@@ -777,19 +785,16 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-            
             try {
                 document.execCommand('copy');
                 showCopyNotification('Script copiado al portapapeles!');
             } catch (err) {
                 showCopyNotification('Error al copiar. Copia manualmente el script.');
             }
-            
             document.body.removeChild(textArea);
         }
 
         function showCopyNotification(message) {
-            // Crear notificación temporal
             const notification = document.createElement('div');
             notification.textContent = message;
             notification.style.cssText = `
@@ -806,8 +811,6 @@
                 box-shadow: 0 5px 20px rgba(0, 255, 204, 0.4);
                 animation: fadeInOut 2s ease-in-out;
             `;
-            
-            // Agregar animación CSS
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes fadeInOut {
@@ -816,9 +819,7 @@
                 }
             `;
             document.head.appendChild(style);
-            
             document.body.appendChild(notification);
-            
             setTimeout(() => {
                 document.body.removeChild(notification);
                 document.head.removeChild(style);
@@ -843,11 +844,11 @@
         let isDragging = false;
         let startX = 0;
         let startTime = 0;
-        
+
         function generateAcronym(gameName) {
             const cleanName = gameName.replace(/[^\w\s]/g, '').trim();
             const words = cleanName.split(/\s+/).filter(word => 
-                word.length > 2 && // Palabras de más de 2 letras
+                word.length > 2 && 
                 !['the', 'and', 'of', 'to', 'you', 'get', 'out'].includes(word.toLowerCase())
             );            
             if (words.length <= 2) {
@@ -859,7 +860,7 @@
                 .map(word => word.charAt(0).toUpperCase())
                 .join('');
         }
-        
+
         function generateGameMappings() {
             const gameMappings = {};            
             cards.forEach(card => {
@@ -886,9 +887,9 @@
             });
             return gameMappings;
         }
-        
+
         const gameMapping = generateGameMappings();
-        
+
         function createIndicators() {
             indicatorsContainer.innerHTML = '';
             cards.forEach((_, index) => {
@@ -898,14 +899,14 @@
                 indicatorsContainer.appendChild(indicator);
             });
         }
-        
+
         function updateIndicators() {
             const indicators = indicatorsContainer.querySelectorAll('.indicator');
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentIndex);
             });
         }
-        
+
         function updateCoverflow() {
             const visibleCards = cards.filter(card => card.style.display !== 'none');
             if (visibleCards.length === 0) return;
@@ -935,24 +936,24 @@
             });
             updateIndicators();
         }
-        
+
         function nextCard() {
             const visibleCards = cards.filter(c => c.style.display !== 'none');
             currentIndex = (currentIndex + 1) % visibleCards.length;
             updateCoverflow();
         }
-        
+
         function previousCard() {
             const visibleCards = cards.filter(c => c.style.display !== 'none');
             currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length;
             updateCoverflow();
         }
-        
+
         function goToCard(index) {
             currentIndex = index;
             updateCoverflow();
         }
-        
+
         function smartSearch(searchTerm, gameName, acronym) {
             const search = searchTerm.toLowerCase().trim();
             const name = gameName.toLowerCase();
@@ -1024,26 +1025,26 @@
             currentIndex = 0;
             updateCoverflow();
         }
-        
+
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value;
             showSuggestions(searchTerm);
             filterCards(searchTerm);
         });
-        
+
         searchInput.addEventListener('focus', () => {
             if (searchInput.value) {
                 showSuggestions(searchInput.value);
             }
         });
-        
+
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 suggestionsContainer.style.display = 'none';
             }
         });
-        
+
         searchInput.addEventListener('keydown', (e) => {
             const suggestions = suggestionsContainer.querySelectorAll('.suggestion-item');
             if (suggestions.length === 0) return;
@@ -1117,11 +1118,11 @@
                 previousCard();
             }
         });
-        
+
         function init() {
             createIndicators();
             updateCoverflow();
-            updateVisitorCount(); // Initialize visitor tracking
+            iniciarContador();
             console.log('Siglas generadas automáticamente:');
             Object.values(gameMapping).forEach(game => {
                 if (game.title) {
@@ -1129,7 +1130,7 @@
                 }
             });
         }
-        
+
         window.addEventListener('load', init);
         window.addEventListener('resize', updateCoverflow);
     </script>
