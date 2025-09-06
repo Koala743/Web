@@ -104,16 +104,25 @@
             position: fixed;
             top: 20px;
             left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             background: rgba(0, 255, 204, 0.1);
             border: 2px solid #00ffcc;
             border-radius: 15px;
-            padding: 10px 15px;
+            padding: 8px 12px;
             backdrop-filter: blur(10px);
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #00ffcc;
             z-index: 1000;
             text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        .visitor-counter svg {
+            width: 20px;
+            height: 20px;
+            fill: #00ffcc;
         }
 
         .copy-btn {
@@ -426,8 +435,13 @@
             .visitor-counter {
                 top: 15px;
                 left: 15px;
-                padding: 8px 12px;
-                font-size: 0.8rem;
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+
+            .visitor-counter svg {
+                width: 18px;
+                height: 18px;
             }
 
             .coverflow-container {
@@ -480,8 +494,13 @@
             .visitor-counter {
                 top: 10px;
                 left: 10px;
-                padding: 6px 10px;
-                font-size: 0.75rem;
+                padding: 5px 8px;
+                font-size: 0.8rem;
+            }
+
+            .visitor-counter svg {
+                width: 16px;
+                height: 16px;
             }
 
             .search-container {
@@ -553,7 +572,10 @@
 <body>
 
     <div class="visitor-counter" id="visitorCounter">
-        Visitas: <span id="visitCount">0</span>
+        <svg viewBox="0 0 24 24">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5s2.47-5.5 5.5-5.5 5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5zm0-9c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5z"/>
+        </svg>
+        <span id="visitCount">0</span>
     </div>
 
     <div class="discord-btn" onclick="window.open('https://discord.gg/Y4GzzDjHem', '_blank')">
@@ -681,85 +703,34 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
-        const GOOGLE_SHEETS_URL = 'https://docs.google.com/spreadsheets/d/16ccUHsX-EhbN7jeaDZ91wqw4nyiL8AM0kcq5MJWVyq8/edit?usp=drivesdk';
-        const SHEET_ID = '16ccUHsX-EhbN7jeaDZ91wqw4nyiL8AM0kcq5MJWVyq8';
+        const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZqCbnJDnkIZ_lk8OPxPQgXFqRSSBjUOHX7wr3G9VklP07zB9_0FHPNiF6RE4Uvx5T/exec";
+        const VISITOR_COUNT_KEY = 'hasVisited';
 
-        const API_URL = 'https://api.sheety.co/2d508c8000bfe7c25d9c84423a0cb1e5/visitas/hoja1';
-        const STORAGE_KEY = 'contador_visitas';
-
-        async function obtenerVisitas() {
+        async function updateVisitorCount() {
+            const visitCountSpan = document.getElementById('visitCount');
+            
             try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                return Number(data.hoja1[0].visitas) || 0;
-            } catch (error) {
-                console.error('Error al obtener visitas:', error);
-                return null;
-            }
-        }
-
-        async function actualizarVisitas(nuevasVisitas) {
-            try {
-                const response = await fetch(`${API_URL}/2`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ hoja1: { visitas: nuevasVisitas } })
-                });
-                return await response.json();
-            } catch (error) {
-                console.error('Error al actualizar visitas:', error);
-            }
-        }
-
-        function setVisitCountSimple(numero) {
-            const span = document.getElementById('visitCount');
-            span.textContent = numero;
-        }
-
-        function animarContadorSpan(inicio, fin, duracion = 800) {
-            const span = document.getElementById('visitCount');
-            let start = null;
-            function paso(timestamp) {
-                if (!start) start = timestamp;
-                const progreso = Math.min((timestamp - start) / duracion, 1);
-                const valor = Math.floor(inicio + (fin - inicio) * progreso);
-                span.textContent = valor;
-                if (progreso < 1) {
-                    requestAnimationFrame(paso);
-                }
-            }
-            requestAnimationFrame(paso);
-        }
-
-        async function iniciarContador() {
-            const span = document.getElementById('visitCount');
-            const guardado = localStorage.getItem(STORAGE_KEY);
-            if (guardado) {
-                setVisitCountSimple(Number(guardado));
-            } else {
-                span.textContent = '...';
-            }
-
-            try {
-                const visitasActuales = await obtenerVisitas();
-                if (visitasActuales === null) {
-                    span.textContent = '0';
-                    return;
+                const hasVisited = localStorage.getItem(VISITOR_COUNT_KEY);
+                let fetchUrl = GOOGLE_APPS_SCRIPT_URL;
+                if (!hasVisited) {
+                    fetchUrl += '?action=increment';
                 }
 
-                if (!localStorage.getItem('yaConto')) {
-                    const nuevasVisitas = visitasActuales + 1;
-                    await actualizarVisitas(nuevasVisitas);
-                    localStorage.setItem('yaConto', 'true');
-                    localStorage.setItem(STORAGE_KEY, nuevasVisitas);
-                    animarContadorSpan(Number(guardado) || visitasActuales, nuevasVisitas);
+                const response = await fetch(fetchUrl);
+                const currentCount = await response.text();
+
+                if (!isNaN(parseInt(currentCount))) {
+                    visitCountSpan.textContent = currentCount;
+                    if (!hasVisited) {
+                        localStorage.setItem(VISITOR_COUNT_KEY, 'true');
+                    }
                 } else {
-                    localStorage.setItem(STORAGE_KEY, visitasActuales);
-                    animarContadorSpan(Number(guardado) || visitasActuales, visitasActuales);
+                    console.error('Respuesta inválida del servidor:', currentCount);
+                    visitCountSpan.textContent = 'Error';
                 }
             } catch (error) {
-                span.textContent = guardado || '0';
-                console.error('Error:', error);
+                console.error('Error al obtener/actualizar el contador de visitas:', error);
+                visitCountSpan.textContent = 'Error';
             }
         }
 
@@ -1122,7 +1093,7 @@
         function init() {
             createIndicators();
             updateCoverflow();
-            iniciarContador();
+            updateVisitorCount();
             console.log('Siglas generadas automáticamente:');
             Object.values(gameMapping).forEach(game => {
                 if (game.title) {
