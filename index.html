@@ -705,10 +705,15 @@
     <script>
         const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZqCbnJDnkIZ_lk8OPxPQgXFqRSSBjUOHX7wr3G9VklP07zB9_0FHPNiF6RE4Uvx5T/exec";
         const VISITOR_COUNT_KEY = 'hasVisited';
+        const LOCAL_VISITOR_COUNT_KEY = 'visitorCount';
+        const POLLING_INTERVAL = 30000;
 
         async function updateVisitorCount() {
             const visitCountSpan = document.getElementById('visitCount');
-            
+            let currentLocalCount = parseInt(localStorage.getItem(LOCAL_VISITOR_COUNT_KEY) || '0');
+
+            visitCountSpan.textContent = currentLocalCount;
+
             try {
                 const hasVisited = localStorage.getItem(VISITOR_COUNT_KEY);
                 let fetchUrl = GOOGLE_APPS_SCRIPT_URL;
@@ -717,15 +722,29 @@
                 }
 
                 const response = await fetch(fetchUrl);
-                const currentCount = await response.text();
+                const apiCount = await response.text();
 
-                if (!isNaN(parseInt(currentCount))) {
-                    visitCountSpan.textContent = currentCount;
-                    if (!hasVisited) {
-                        localStorage.setItem(VISITOR_COUNT_KEY, 'true');
-                    }
+                if (!isNaN(parseInt(apiCount))) {
+                    const finalCount = parseInt(apiCount);
+                    
+                    gsap.to(visitCountSpan, {
+                        duration: 1.5,
+                        textContent: finalCount,
+                        roundProps: "textContent",
+                        ease: "power1.out",
+                        onUpdate: function() {
+                            visitCountSpan.textContent = Math.round(visitCountSpan.textContent);
+                        },
+                        onComplete: function() {
+                            localStorage.setItem(LOCAL_VISITOR_COUNT_KEY, finalCount);
+                            if (!hasVisited) {
+                                localStorage.setItem(VISITOR_COUNT_KEY, 'true');
+                            }
+                        }
+                    });
+
                 } else {
-                    console.error('Respuesta inválida del servidor:', currentCount);
+                    console.error('Respuesta inválida del servidor:', apiCount);
                     visitCountSpan.textContent = 'Error';
                 }
             } catch (error) {
@@ -1094,12 +1113,7 @@
             createIndicators();
             updateCoverflow();
             updateVisitorCount();
-            console.log('Siglas generadas automáticamente:');
-            Object.values(gameMapping).forEach(game => {
-                if (game.title) {
-                    console.log(`${game.title} -> ${game.acronym}`);
-                }
-            });
+            setInterval(updateVisitorCount, POLLING_INTERVAL);
         }
 
         window.addEventListener('load', init);
